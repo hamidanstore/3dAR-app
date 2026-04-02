@@ -1,4 +1,4 @@
-name: Build Android APK 
+name: Build Android APK Fix
 on:
   workflow_dispatch:
 
@@ -32,7 +32,7 @@ jobs:
           
           # Tulis ulang Manifest dengan izin Internet & Kamera
           cat <<EOF > android/app/src/main/AndroidManifest.xml
-          <?xml version="3.0" encoding="utf-8"?>
+          <?xml version="1.0" encoding="utf-8"?>
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
               <uses-permission android:name="android.permission.INTERNET" />
               <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -77,43 +77,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 3dAR-Final-App
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-          sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />\n    <uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />\n    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />\n    <uses-feature android:name="android.hardware.camera.ar" android:required="true" />' android/app/src/main/AndroidManifest.xml
-          
-          # 4. Generate Ikon dan Splash
-          npx capacitor-assets generate --android
-          
-          # 5. Sinkronisasi akhir
-          npx cap sync android
-
-      - name: Build APK Android
-        working-directory: ./android
-        run: |
-          chmod +x ./gradlew
-          ./gradlew assembleDebug
-
-      - name: Upload File APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: 3dAR-Final-App
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-      - name: Suntik Izin Android (Permissions)
-        run: |
-          sed -i '/<application/i \    <uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />\n    <uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />\n    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />\n    <uses-feature android:name="android.hardware.camera.ar" android:required="true" />' android/app/src/main/AndroidManifest.xml
-
-      - name: Generate Folder Android & Sinkronisasi
-        run: |
-          npx cap add android || true
-          npx cap sync android
-
-      - name: Build APK Android
-        working-directory: ./android
-        run: |
-          chmod +x ./gradlew
-          ./gradlew assembleDebug
-
-      - name: Upload File APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: 3dAR-App-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
