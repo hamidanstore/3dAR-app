@@ -25,7 +25,7 @@ jobs:
 
       - name: Generate Folder Android & Sinkronisasi
         run: |
-          npx cap add android
+          npx cap add android || true
           npx cap sync android
 
       - name: Build APK Android
