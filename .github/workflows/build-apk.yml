@@ -62,7 +62,7 @@ jobs:
           EOF
           
           # Paksa generate aset
-          npx @capacitor/assets generate --android --icon icon.png --splash splash.png
+          npx @capacitor/assets generate --android
 
       - name: Sinkronisasi Akhir
         run: npx cap sync android
