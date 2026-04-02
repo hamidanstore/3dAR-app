@@ -278,7 +278,7 @@
             <div class="app-info-box">
                 <h3><i class="fa-solid fa-circle-info" style="color: var(--hijau);"></i> Detail Aplikasi</h3>
                 <p><strong>Nama Aplikasi:</strong> <span>3dAR</span></p>
-                <p><strong>Versi:</strong> <span>1.0</span></p>
+                <p><strong>Versi:</strong> <span>4.0</span></p>
                 <p><strong>Platform:</strong> <span>HTML5(APK)</span></p>
                 <p><strong>Lisensi:</strong> <span>Hak Cipta &copy; Hamidan Store</span></p>
             </div>
@@ -651,7 +651,7 @@
             
             // PEMBARUAN 3: Setiap tombol tambah file ditekan, muncul konfirmasi pilihan mode upload
             emptyBox.onclick = () => {
-                const useCamera = confirm("Gunakan Kamera untuk mengambil gambar/video?\n\n[OK] untuk Kamera\n[Batal] untuk Galeri/File");
+                const useCamera = confirm("Gunakan Kamera untuk mengambil gambar/video?\n\n[OK] untuk Kamera\n[CANCEL] untuk Galeri/File");
                 if (useCamera) {
                     fileInput.setAttribute('accept', 'image/*,video/*');
                     fileInput.setAttribute('capture', 'environment');
