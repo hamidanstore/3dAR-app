@@ -17,6 +17,17 @@ jobs:
       - name: Install Capacitor
         run: npm install
 
+      - name: Install Dependencies & Assets Tool
+        run: |
+          npm install
+          npm install @capacitor/assets --save-dev
+
+      - name: Generate Ikon dan Splash Screen
+        run: |
+          # Perintah ini akan mengambil icon.png dan splash.png 
+          # lalu mengubahnya menjadi folder res di dalam proyek android
+          npx capacitor-assets generate --android
+
       - name: Siapkan Java JDK 17
         uses: actions/setup-java@v4
         with:
